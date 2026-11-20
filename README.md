@@ -2,12 +2,12 @@
 A Raspberry Pi Enigma machine for teaching
 
 ## Goal
-A self contained machine: keys, lamps, rotors, plugboard. First mostly software, eventually more and more hardware added.
+A self-contained machine: keys, lamps, rotors, plugboard. First mostly software, eventually more and more hardware added.
 
 ## Status
 Version 0.0.0 Initial building of the cipher software
 
-## Planned features.
+## Planned features
 
 ### v1.0.0 (MVP)
 - Historically accurate Enigma I cipher: rotors I–V, reflectors B and C,
