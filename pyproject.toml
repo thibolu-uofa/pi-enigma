@@ -10,10 +10,31 @@ requires-python = ">=3.11"
 dependencies = []               # runtime packages (none yet)
 
 [project.optional-dependencies]
-dev = ["pytest"]                # tools only needed while developing
+dev = ["pytest", "ruff", "mypy", "pre-commit"]                # tools only needed while developing
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88          # max characters per line
+target-version = "py311"  # matches requires-python
+
+[tool.ruff.lint]
+select = [
+  "E", "W",  # PEP 8 style errors and warnings
+  "F",       # real bugs: unused imports, undefined names
+  "I",       # import sorting
+  "B",       # common bug patterns (bugbear)
+  "UP",      # use modern Python syntax
+  "N",       # PEP 8 naming (snake_case, CamelCase)
+  "SIM",     # suggest simpler code
+]
+
+[tool.mypy]
+mypy_path = "src"
+files = ["src", "tests"]
+strict = true
+
