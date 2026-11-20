@@ -10,7 +10,13 @@ requires-python = ">=3.11"
 dependencies = []               # runtime packages (none yet)
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff", "mypy", "pre-commit"]                # tools only needed while developing
+# tools only needed while developing
+dev = [
+  "pytest",
+  "ruff",
+  "mypy",
+  "pre-commit",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -37,4 +43,3 @@ select = [
 mypy_path = "src"
 files = ["src", "tests"]
 strict = true
-
