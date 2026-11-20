@@ -1,0 +1,29 @@
+name: CI                      # name shown on GitHub
+
+on:                           # when to run
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest    # a fresh Linux machine each time
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]   # oldest we support + the Pi's version
+    steps:
+      - uses: actions/checkout@v4          # get your code
+      - uses: actions/setup-python@v5      # install Python
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Format check
+        run: ruff format --check .
+      - name: Lint
+        run: ruff check .
+      - name: Type check
+        run: mypy
+      - name: Tests
+        run: pytest
