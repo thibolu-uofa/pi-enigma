@@ -40,7 +40,7 @@ class Rotor:
         letter = letter.upper()
         if not _is_valid(letter):
             raise ValueError("Input must be a single letter A-Z.")
-        letter_forward = self._wiring[(_to_index(letter))]
+        letter_forward = self._wiring[_to_index(letter)]
         return letter_forward
 
     def backward(self, letter: str) -> str:

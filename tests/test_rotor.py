@@ -14,7 +14,13 @@ def test_tr1_forward_a_to_e() -> None:
     assert rotor.forward("A") == "E"
 
 
-@pytest.mark.parametrize("bad_letter", ["7", "!", "Ä", "", "AB"])
+def test_tr7_forward_accepts_lowercase() -> None:
+    """forward() treats lowercase letters like their uppercase versions."""
+    rotor = Rotor(ROTOR_I_WIRING, ROTOR_I_NOTCH)
+    assert rotor.forward("a") == rotor.forward("A") == "E"
+
+
+@pytest.mark.parametrize("bad_letter", ["7", "!", "Ä", "ı", "ſ", "", "AB"])
 def test_tr7_forward_rejects_invalid_letter(bad_letter: str) -> None:
     """forward() must reject anything that is not a single letter A-Z."""
     rotor = Rotor(ROTOR_I_WIRING, ROTOR_I_NOTCH)
