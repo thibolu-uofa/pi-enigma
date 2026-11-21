@@ -1,3 +1,14 @@
+"""A single Enigma rotor.
+
+A rotor is a wheel with 26 contacts on each side, wired internally so that
+each letter maps to a different one. Its position (the letter in the window)
+and ring setting shift that mapping, and the rotor steps as keys are pressed.
+
+Letters are handled at the edges; internally everything is a number 0-25
+(A=0 ... Z=25).
+"""
+
+
 def _to_index(letter: str) -> int:
     """Convert a letter A-Z (either case) to a number 0-25.
 
@@ -12,6 +23,7 @@ def _to_index(letter: str) -> int:
 
 
 def _to_letter(index: int) -> str:
+    """Convert a number 0-25 to its letter A-Z."""
     return chr(index + ord("A"))
 
 
@@ -43,8 +55,8 @@ class Rotor:
 
     def step(self) -> None:
         """Advance the rotor by one position, wrapping Z back to A."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        raise NotImplementedError("not implemented yet.")
 
     def at_notch(self) -> bool:
         """Return True if the rotor is at its notch position."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        raise NotImplementedError("not implemented yet.")

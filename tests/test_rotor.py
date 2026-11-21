@@ -1,4 +1,4 @@
-"""Tests for the Rotor class"""
+"""Tests for the Rotor class."""
 
 import pytest
 
