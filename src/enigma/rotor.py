@@ -1,3 +1,21 @@
+def _is_valid(letter: str) -> bool:
+    """Return True if the letter is a single uppercase letter A-Z."""
+    return (
+        len(letter) == 1
+        and letter.isalpha()
+        and ord(letter) >= ord("A")
+        and ord(letter) <= ord("Z")
+    )
+
+
+def _to_index(letter: str) -> int:
+    return ord(letter) - ord("A")
+
+
+def _to_letter(index: int) -> str:
+    return chr(index + ord("A"))
+
+
 class Rotor:
     """One Enigma rotor: scrambles letters and turns as keys are pressed."""
 
@@ -17,8 +35,11 @@ class Rotor:
 
     def forward(self, letter: str) -> str:
         """Encode a letter right-to-left (towards the reflector)."""
+        if not _is_valid(letter):
+            raise ValueError("Input must be a single letter A-Z.")
+        print(letter)
         letter = letter.upper()
-        letter_forward = self._wiring[(ord(letter) - ord("A")) % 26]
+        letter_forward = self._wiring[(_to_index(letter)) % 26]
         return letter_forward
 
     def backward(self, letter: str) -> str:
