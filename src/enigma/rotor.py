@@ -5,16 +5,21 @@ class Rotor:
         self, wiring: str, notch: str, ring: str = "A", position: str = "A"
     ) -> None:
         """Create a rotor from its wiring, notch, ring setting and start position."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        self._wiring = wiring.upper()
+        self._notch = notch.upper()
+        self._ring = ring.upper()
+        self._position = position.upper()
 
     @property
     def position(self) -> str:
         """The letter currently shown in the rotor window."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        return self._position
 
     def forward(self, letter: str) -> str:
         """Encode a letter right-to-left (towards the reflector)."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        letter = letter.upper()
+        letter_forward = self._wiring[(ord(letter) - ord("A")) % 26]
+        return letter_forward
 
     def backward(self, letter: str) -> str:
         """Encode a letter left-to-right (back from the reflector)."""
