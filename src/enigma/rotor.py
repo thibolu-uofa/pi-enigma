@@ -1,14 +1,13 @@
-def _is_valid(letter: str) -> bool:
-    """Return True if the letter is a single uppercase letter A-Z."""
-    return (
-        len(letter) == 1
-        and letter.isalpha()
-        and ord(letter) >= ord("A")
-        and ord(letter) <= ord("Z")
-    )
-
-
 def _to_index(letter: str) -> int:
+    """Convert a letter A-Z (either case) to a number 0-25.
+
+    Raises ValueError for anything that is not a single ASCII letter.
+    """
+    if not letter.isascii():
+        raise ValueError("Input must be a single ASCII letter.")
+    letter = letter.upper()
+    if len(letter) != 1 or not "A" <= letter <= "Z":
+        raise ValueError("Input must be a single letter A-Z.")
     return ord(letter) - ord("A")
 
 
@@ -35,13 +34,7 @@ class Rotor:
 
     def forward(self, letter: str) -> str:
         """Encode a letter right-to-left (towards the reflector)."""
-        if not letter.isascii():
-            raise ValueError("Input must be a single ASCII letter.")
-        letter = letter.upper()
-        if not _is_valid(letter):
-            raise ValueError("Input must be a single letter A-Z.")
-        letter_forward = self._wiring[_to_index(letter)]
-        return letter_forward
+        return self._wiring[_to_index(letter)]
 
     def backward(self, letter: str) -> str:
         """Encode a letter left-to-right (back from the reflector)."""
