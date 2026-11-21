@@ -14,6 +14,12 @@ def test_tr1_forward_a_to_e() -> None:
     assert rotor.forward("A") == "E"
 
 
+def test_tr1_backward_e_to_a() -> None:
+    """Rotor I encodes E back to A in the backward direction."""
+    rotor = Rotor(ROTOR_I_WIRING, ROTOR_I_NOTCH)
+    assert rotor.backward("E") == "A"
+
+
 def test_tr7_forward_accepts_lowercase() -> None:
     """forward() treats lowercase letters like their uppercase versions."""
     rotor = Rotor(ROTOR_I_WIRING, ROTOR_I_NOTCH)

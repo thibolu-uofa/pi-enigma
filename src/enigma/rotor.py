@@ -22,7 +22,7 @@ class Rotor:
         self, wiring: str, notch: str, ring: str = "A", position: str = "A"
     ) -> None:
         """Create a rotor from its wiring, notch, ring setting and start position."""
-        self._wiring = wiring.upper()
+        self._wiring = [_to_index(c) for c in wiring]
         self._notch = notch.upper()
         self._ring = ring.upper()
         self._position = position.upper()
@@ -34,11 +34,12 @@ class Rotor:
 
     def forward(self, letter: str) -> str:
         """Encode a letter right-to-left (towards the reflector)."""
-        return self._wiring[_to_index(letter)]
+        return _to_letter(self._wiring[_to_index(letter)])
 
     def backward(self, letter: str) -> str:
         """Encode a letter left-to-right (back from the reflector)."""
-        raise NotImplementedError("Rotor class is not implemented yet.")
+        index = self._wiring.index(_to_index(letter))
+        return _to_letter(index)
 
     def step(self) -> None:
         """Advance the rotor by one position, wrapping Z back to A."""
