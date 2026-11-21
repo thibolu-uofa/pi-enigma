@@ -35,11 +35,12 @@ class Rotor:
 
     def forward(self, letter: str) -> str:
         """Encode a letter right-to-left (towards the reflector)."""
+        if not letter.isascii():
+            raise ValueError("Input must be a single ASCII letter.")
+        letter = letter.upper()
         if not _is_valid(letter):
             raise ValueError("Input must be a single letter A-Z.")
-        print(letter)
-        letter = letter.upper()
-        letter_forward = self._wiring[(_to_index(letter)) % 26]
+        letter_forward = self._wiring[(_to_index(letter))]
         return letter_forward
 
     def backward(self, letter: str) -> str:
